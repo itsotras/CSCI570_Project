@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BASE_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 INPUT_DIR="$BASE_DIR/Generated_strings"
 OUTPUT_DIR="$BASE_DIR/Outputs"
