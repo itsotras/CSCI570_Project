@@ -1,3 +1,6 @@
+import sys
+import time, tracemalloc
+
 delta = 30  # gap penalty
 
 alpha = {
@@ -93,3 +96,33 @@ def basic_align(X: str, Y: str):
     cost = dp[m][n]
 
     return cost, aligned_X, aligned_Y
+
+
+if __name__ == "__main__":
+    input_path = sys.argv[1]
+    output_path = sys.argv[2]
+
+    with open(input_path, "r") as f:
+        file_lines = [file_line.strip() for file_line in f if file_line.strip()]
+        X = file_lines[0]
+        Y = file_lines[1]
+        
+    tracemalloc.start()
+    start = time.time()
+
+    cost, ax, ay = basic_align(X, Y)
+
+    end = time.time()
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    time_ms = (end - start) * 1000
+    memory_kb = peak / 1024
+
+    with open(output_path, "w") as f:
+        f.write(str(cost) + "\n")
+        f.write(ax + "\n")
+        f.write(ay + "\n")
+        f.write(f"{time_ms:.3f}\n")
+        f.write(f"{memory_kb:.3f}\n")
+
