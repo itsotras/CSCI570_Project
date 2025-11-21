@@ -89,7 +89,7 @@ def single_test(input, output, M, details=True):
     Y = DNAs[1].strip("\n")
     # Ground-Truth, produced by global alignment in Bio package 
     seqX_GND, seqY_GND, score_GND = align(X,Y,M)
-    
+    score_test_GND = score_alignment(seqX_GND, seqY_GND, M)
     try:
         with open(output, "r") as f:
             Aligned = f.readlines() 
@@ -151,7 +151,7 @@ def single_test(input, output, M, details=True):
         print("\t Score EFF: ", score_EFF)
         print()
 
-        print("\t True score GND: ", score_GND)
+        print("\t True score GND: ", score_test_GND)
         print("\t True score GEN: ", score_test_GEN)
         print("\t True score BSC: ", score_test_BSC)
         print("\t True score EFF: ", score_test_EFF)
