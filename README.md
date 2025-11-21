@@ -43,4 +43,4 @@ Then just change the test scale you want in the file and run it
 python CSCI570_Project_Minimum_Jul_14/alignment_test.py
 ```
 
-The test file use the python lib Bio to generate ground truth alignment and score, however, since the backtracking direction taught in this course is different than what is used in the general version, thus the alignment of the ground truth shall not be treated as a reference, the only thing matters is the ground truth score
+The test file use the python lib Bio to generate ground truth alignment and score, however, since the backtracking direction taught in this course is different from what is used in the general version, the alignment of the ground truth shall only be used as a reference, the most important thing is the ground truth score
