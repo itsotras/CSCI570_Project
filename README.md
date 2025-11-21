@@ -36,7 +36,7 @@ Error EFF: N/A
 
 To run this test file, first you need to activate the virtual env, use 
 ```bash
-source CSCI570_ENV activate
+source ./CSCI570_ENV/bin/activate
 ```
 Then just change the test scale you want in the file and run it
 ```bash
