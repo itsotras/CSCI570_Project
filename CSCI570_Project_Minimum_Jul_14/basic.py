@@ -123,6 +123,6 @@ if __name__ == "__main__":
         f.write(str(cost) + "\n")
         f.write(ax + "\n")
         f.write(ay + "\n")
-        f.write(f"{time_ms:.3f}\n Milliseconds")
-        f.write(f"{memory_kb:.3f}\n Kilobytes")
+        f.write(f"{time_ms:.3f} Milliseconds\n")
+        f.write(f"{memory_kb:.3f} Kilobytes\n")
 
