@@ -14,20 +14,24 @@ alpha = {
 # Compute only the last DP row of aligning X with Y
 # Used by the divide & conquer step
 def compute_last_row(X, Y):
+    # Return the DP costs for aligning the full prefix X[:m] with every
+    # prefix of Y (i.e. a list of length n+1 where index j is cost(X, Y[:j])).
     m, n = len(X), len(Y)
 
-    prev = [j * delta for j in range(m + 1)]
+    # prev represents dp[0][j] for j=0..n (aligning empty X with prefixes of Y)
+    prev = [j * delta for j in range(n + 1)]
 
-    for j in range(1, n + 1):
-        curr = [j * delta]
-        yj = Y[j - 1]
+    for i in range(1, m + 1):
+        xi = X[i - 1]
+        # dp[i][0] = i * delta (aligning X[:i] with empty Y)
+        curr = [i * delta]
 
-        for i in range(1, m + 1):
-            xi = X[i - 1]
+        for j in range(1, n + 1):
+            yj = Y[j - 1]
 
-            cost_match = prev[i - 1] + alpha[xi][yj]
-            cost_up    = prev[i] + delta
-            cost_left  = curr[i - 1] + delta
+            cost_match = prev[j - 1] + alpha[xi][yj]
+            cost_up    = prev[j] + delta
+            cost_left  = curr[j - 1] + delta
 
             curr.append(min(cost_match, cost_up, cost_left))
 
@@ -166,5 +170,5 @@ if __name__ == "__main__":
         f.write(str(cost) + "\n")
         f.write(aligned_X + "\n")
         f.write(aligned_Y + "\n")
-        f.write(f"{time_ms:.3f}\n")
-        f.write(f"{memory_kb:.3f}\n")
+        f.write(f"{time_ms:.3f} Milliseconds\n")
+        f.write(f"{memory_kb:.3f} Kilobytes\n")
