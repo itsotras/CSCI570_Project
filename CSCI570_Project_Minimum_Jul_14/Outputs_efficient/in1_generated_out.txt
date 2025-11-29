@@ -1,0 +1,5 @@
+168
+CCAC_CAG_G
+_CATGCA_TG
+0.40293 Milliseconds
+1.55762 Kilobytes
