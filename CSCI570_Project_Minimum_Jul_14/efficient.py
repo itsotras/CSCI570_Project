@@ -11,6 +11,26 @@ alpha = {
 }
 
 
+def generate_strings(inputFile):
+    str1 = ""
+    str2 = ""
+    try:
+       with open(inputFile, 'r') as file:
+        curr = ""
+        all_lines = file.readlines()
+        for line in all_lines:
+            line = line.strip()
+            if(line.isalpha()):
+                if(curr != ""):
+                    str1 = curr
+                curr = line
+            else:
+                curr = curr[:(int)(line)+1]+curr+curr[(int)(line)+1:]
+        str2 = curr
+    except FileNotFoundError:
+        print(f"Error: The file '{inputFile}' was not found.")
+    return str1, str2
+
 # Compute only the last DP row of aligning X with Y
 # Used by the divide & conquer step
 def compute_last_row(X, Y):
@@ -145,10 +165,7 @@ if __name__ == "__main__":
     input_path = sys.argv[1]
     output_path = sys.argv[2]
 
-    with open(input_path, "r") as f:
-        file_lines = [line.strip() for line in f if line.strip()]
-        X = file_lines[0]
-        Y = file_lines[1]
+    X, Y = generate_strings(input_path)
 
     tracemalloc.start()
     start = time.time()

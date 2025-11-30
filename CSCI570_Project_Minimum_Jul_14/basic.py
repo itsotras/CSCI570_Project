@@ -1,6 +1,27 @@
 import sys
 import time, tracemalloc
 
+def generate_strings(inputFile):
+    str1 = ""
+    str2 = ""
+    try:
+       with open(inputFile, 'r') as file:
+        curr = ""
+        all_lines = file.readlines()
+        for line in all_lines:
+            line = line.strip()
+            if(line.isalpha()):
+                if(curr != ""):
+                    str1 = curr
+                curr = line
+            else:
+                curr = curr[:(int)(line)+1]+curr+curr[(int)(line)+1:]
+        str2 = curr
+    except FileNotFoundError:
+        print(f"Error: The file '{inputFile}' was not found.")
+    return str1, str2
+
+
 delta = 30  # gap penalty
 
 alpha = {
@@ -102,10 +123,11 @@ if __name__ == "__main__":
     input_path = sys.argv[1]
     output_path = sys.argv[2]
 
-    with open(input_path, "r") as f:
-        file_lines = [file_line.strip() for file_line in f if file_line.strip()]
-        X = file_lines[0]
-        Y = file_lines[1]
+    # with open(input_path, "r") as f:
+    #     file_lines = [file_line.strip() for file_line in f if file_line.strip()]
+    #     X = file_lines[0]
+    #     Y = file_lines[1]
+    X, Y = generate_strings(input_path)
         
     tracemalloc.start()
     start = time.time()
@@ -123,6 +145,6 @@ if __name__ == "__main__":
         f.write(str(cost) + "\n")
         f.write(ax + "\n")
         f.write(ay + "\n")
-        f.write(f"{time_ms:.3f}\n Milliseconds")
-        f.write(f"{memory_kb:.3f}\n Kilobytes")
+        f.write(f"{time_ms:.3f}\n")
+        f.write(f"{memory_kb:.3f}\n")
 
